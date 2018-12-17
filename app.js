@@ -1,7 +1,9 @@
 const qwerty = document.getElementById('qwerty');
-const ul = document.getElementById('phrase');
+const ul = document.querySelector('#phrase ul');
 const mainDiv = document.querySelector('.main-container');
 const letters = document.getElementsByClassName('letter');
+const ol = document.querySelector('#scoreboard').firstElementChild;
+const show = document.getElementsByClassName('show');
 let missed = 0;
 
 
@@ -15,7 +17,7 @@ mainDiv.addEventListener('click', (e) => {
   });
 
 
-var phrases = ['bread', 'milk', 'orange', 'grapes', 'honey'];
+var phrases = ['orange', 'bread', 'milk', 'grapes', 'cheese'];
 
 // Get random phrase function
 
@@ -34,7 +36,7 @@ const phraseArray = getRandomPhrase(phrases);
 function addPhraseToDisplay(array) {
   for (var i = 0; i < array.length; i += 1) {
     let li = document.createElement('li');
-    li.textContent = array[i].toUpperCase();
+    li.textContent = array[i];
     if(array[i] !== " ") {
      li.className = "letter";
    } else {
@@ -52,13 +54,32 @@ function checkLetter(clicked) {
   const guess = clicked.textContent;
   let correctLetter = null;
   for (let i = 0; i < letters.length; i += 1) {
-    if (letters[i].textContent.toUpperCase() === guess) {
+    if (letters[i].textContent === guess) {
       letters[i].classList.add('show');
       correctLetter = letters[i].textContent;
    }
 }
 return correctLetter;
 };
+
+//Check Win Function
+
+function checkWin() {
+  const overlay = document.querySelector('#overlay');
+  let header = document.querySelector('h2');
+  if (show.length === letters.length) {
+    overlay.classList.add('win');
+    overlay.classList.remove('start');
+    overlay.style.display = 'unset';
+    header.textContent = 'You Win!'
+  }
+  else if (missed >= 5) {
+    overlay.classList.add('lose');
+    overlay.classList.remove('start');
+    overlay.style.display = 'unset';
+    header.textContent = 'You Lose!'
+  }
+}
 
 
 //Add Event Listener to Keyboard to listen for button clicked
@@ -72,4 +93,14 @@ if (event.target.tagName === 'BUTTON') {
 else {
   return false;
 }
+
+// If wrong letter is selected
+
+if (checkLetter(event.target) === null) {
+  let list = ol.lastElementChild;
+  ol.removeChild(list);
+  missed += 1;
+}
+checkWin();
+
 });
