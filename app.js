@@ -17,7 +17,7 @@ mainDiv.addEventListener('click', (e) => {
   });
 
 
-var phrases = ['orange', 'bread', 'milk', 'grapes', 'cheese'];
+var phrases = ['Oscar Wilde', 'Roald Dahl', 'James Joyce', 'Emily Bronte', 'Sylvia Plath'];
 
 // Get random phrase function
 
@@ -54,7 +54,7 @@ function checkLetter(clicked) {
   const guess = clicked.textContent;
   let correctLetter = null;
   for (let i = 0; i < letters.length; i += 1) {
-    if (letters[i].textContent === guess) {
+    if (letters[i].textContent.toLowerCase() === guess) {
       letters[i].classList.add('show');
       correctLetter = letters[i].textContent;
    }
