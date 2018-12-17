@@ -51,7 +51,6 @@ addPhraseToDisplay(phraseArray);
 function checkLetter(clicked) {
   const guess = clicked.textContent;
   let correctLetter = null;
-
   for (let i = 0; i < letters.length; i += 1) {
     if (letters[i].textContent.toUpperCase() === guess) {
       letters[i].classList.add('show');
@@ -60,6 +59,7 @@ function checkLetter(clicked) {
 }
 return correctLetter;
 };
+
 
 //Add Event Listener to Keyboard to listen for button clicked
 
