@@ -2,7 +2,6 @@ const qwerty = document.getElementById('qwerty');
 const ul = document.querySelector('#phrase ul');
 const mainDiv = document.querySelector('.main-container');
 const letters = document.getElementsByClassName('letter');
-const ol = document.querySelector('#scoreboard').firstElementChild;
 const show = document.getElementsByClassName('show');
 const btn = document.querySelector('.btn__reset');
 const lives = document.querySelectorAll('img');
