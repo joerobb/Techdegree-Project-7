@@ -74,7 +74,8 @@ function checkWin() {
     overlay.classList.add('win');
     overlay.classList.remove('start');
     overlay.style.display = 'unset';
-    header.textContent = 'You Win!';
+    header.textContent = 'Congratulations, you win!';
+    header.style.marginBottom = '200px';
     btn.textContent = 'Play again'
   }
   else if (missed >= 5) {
@@ -82,6 +83,7 @@ function checkWin() {
     overlay.classList.remove('start');
     overlay.style.display = 'unset';
     header.textContent = 'You Lose!';
+    header.style.marginBottom = '200px';
     btn.textContent = 'Try again'
   }
 }
