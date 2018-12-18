@@ -4,6 +4,9 @@ const mainDiv = document.querySelector('.main-container');
 const letters = document.getElementsByClassName('letter');
 const ol = document.querySelector('#scoreboard').firstElementChild;
 const show = document.getElementsByClassName('show');
+const btn = document.querySelector('.btn__reset');
+const lives = document.querySelectorAll('img');
+const buttons = qwerty.querySelectorAll('button');
 let missed = 0;
 
 
@@ -71,16 +74,17 @@ function checkWin() {
     overlay.classList.add('win');
     overlay.classList.remove('start');
     overlay.style.display = 'unset';
-    header.textContent = 'You Win!'
+    header.textContent = 'You Win!';
+    btn.textContent = 'Play again'
   }
   else if (missed >= 5) {
     overlay.classList.add('lose');
     overlay.classList.remove('start');
     overlay.style.display = 'unset';
-    header.textContent = 'You Lose!'
+    header.textContent = 'You Lose!';
+    btn.textContent = 'Try again'
   }
 }
-
 
 //Add Event Listener to Keyboard to listen for button clicked
 
@@ -97,10 +101,31 @@ else {
 // If wrong letter is selected
 
 if (checkLetter(event.target) === null) {
-  let list = ol.lastElementChild;
-  ol.removeChild(list);
-  missed += 1;
+  // let list = ol.lastElementChild;
+  // ol.removeChild(list);
+
+lives[missed].style.display = 'none';
+missed += 1;
 }
 checkWin();
+});
 
+//FUNCTION TO RESET THE GAME
+
+btn.addEventListener('click', () => {
+    overlay.className = "start";
+    missed = 0;
+    ul.textContent = '';
+    for (i = 0; i < buttons.length; i += 1) {
+        buttons[i].removeAttribute('class');
+        buttons[i].removeAttribute('disabled');
+    }
+
+    for (let i = 0; i < lives.length; i += 1) {
+        lives[i].style.display = 'flex';
+    }
+
+    const phraseArray = getRandomPhrase(phrases);
+    addPhraseToDisplay(phraseArray);
+    overlay.style.display = "none";
 });
